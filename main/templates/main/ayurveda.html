@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanskriti Ayurveda | Ayurveda</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    background:#f4f8f5;
+    font-family:'Poppins',sans-serif;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#184d37;
+}
+.navbar a{color:#fff!important;}
+
+/* HEADER */
+.page-header{
+    text-align:center;
+    padding:80px 15px 30px;
+}
+.page-header h1{
+    font-weight:700;
+    color:#184d37;
+}
+.page-header p{color:#666;}
+
+/* SEARCH */
+.search-box{max-width:600px;margin:auto;}
+
+/* FILTERS */
+.filter-btns button{
+    border-radius:20px;
+    margin:4px;
+}
+
+/* GRID */
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:22px;
+}
+
+/* CARD */
+.ayu-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    transition:0.4s;
+}
+.ayu-card:hover{
+    transform:translateY(-8px) scale(1.01);
+    box-shadow:0 18px 35px rgba(0,0,0,0.2);
+}
+.ayu-card img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+}
+.content{padding:15px;}
+.tag{
+    display:inline-block;
+    background:#e1f3eb;
+    color:#184d37;
+    font-size:12px;
+    padding:4px 10px;
+    border-radius:20px;
+    margin-bottom:6px;
+}
+.ayu-card h6{font-weight:600;}
+.benefits span{
+    background:#f1f1f1;
+    border-radius:12px;
+    padding:3px 10px;
+    font-size:11px;
+    margin:2px;
+    display:inline-block;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+<div class="container">
+<a class="navbar-brand fw-bold" href="/">🌿 Sanskriti Ayurveda</a>
+</div>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header">
+<h1>Ayurveda Knowledge Hub</h1>
+<p>Ancient healing science for modern life</p>
+
+<div class="search-box mt-3">
+<input type="text" id="search" class="form-control form-control-lg" placeholder="Search disease, herb, therapy, practice...">
+</div>
+
+<div class="filter-btns mt-3">
+<button class="btn btn-success" onclick="filterCards('all')">All</button>
+<button class="btn btn-outline-success" onclick="filterCards('herb')">Herbs</button>
+<button class="btn btn-outline-success" onclick="filterCards('medicine')">Medicines</button>
+<button class="btn btn-outline-success" onclick="filterCards('therapy')">Therapies</button>
+<button class="btn btn-outline-success" onclick="filterCards('practice')">Practices</button>
+</div>
+</div>
+
+<!-- CONTENT -->
+<div class="container pb-5">
+<div class="card-grid" id="cardGrid">
+
+<!-- 1 -->
+<div class="ayu-card herb">
+<img src="https://images.unsplash.com/photo-1600788886242-5c96d0c03b7d">
+<div class="content">
+<span class="tag">Herb</span>
+<h6>Ashwagandha</h6>
+<p>Improves immunity and reduces stress.</p>
+<div class="benefits"><span>Stress</span><span>Sleep</span><span>Energy</span></div>
+</div>
+</div>
+
+<!-- 2 -->
+<div class="ayu-card herb">
+<img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2">
+<div class="content">
+<span class="tag">Herb</span>
+<h6>Tulsi</h6>
+<p>Boosts immunity and respiratory health.</p>
+<div class="benefits"><span>Cough</span><span>Cold</span><span>Immunity</span></div>
+</div>
+</div>
+
+<!-- 3 -->
+<div class="ayu-card herb">
+<img src="https://images.unsplash.com/photo-1626078299019-0a9f8df88f36">
+<div class="content">
+<span class="tag">Herb</span>
+<h6>Amla</h6>
+<p>Natural vitamin C source.</p>
+<div class="benefits"><span>Hair</span><span>Skin</span><span>Immunity</span></div>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="ayu-card herb">
+<img src="https://images.unsplash.com/photo-1615485290332-f2c9f65ad3d0">
+<div class="content">
+<span class="tag">Herb</span>
+<h6>Neem</h6>
+<p>Powerful blood purifier.</p>
+<div class="benefits"><span>Skin</span><span>Acne</span><span>Detox</span></div>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="ayu-card herb">
+<img src="https://images.unsplash.com/photo-1603909223429-69bb7101f420">
+<div class="content">
+<span class="tag">Herb</span>
+<h6>Turmeric</h6>
+<p>Anti-inflammatory herb.</p>
+<div class="benefits"><span>Pain</span><span>Inflammation</span></div>
+</div>
+</div>
+
+<!-- 6 -->
+<div class="ayu-card medicine">
+<img src="https://images.unsplash.com/photo-1600289031464-74d374b64991">
+<div class="content">
+<span class="tag">Medicine</span>
+<h6>Chyawanprash</h6>
+<p>Traditional immunity tonic.</p>
+<div class="benefits"><span>Weakness</span><span>Cold</span></div>
+</div>
+</div>
+
+<!-- 7 -->
+<div class="ayu-card medicine">
+<img src="https://images.unsplash.com/photo-1615485290224-f4d6cc7a2c56">
+<div class="content">
+<span class="tag">Medicine</span>
+<h6>Triphala</h6>
+<p>Digestive detox formula.</p>
+<div class="benefits"><span>Digestion</span><span>Constipation</span></div>
+</div>
+</div>
+
+<!-- 8 -->
+<div class="ayu-card medicine">
+<img src="https://images.unsplash.com/photo-1615485290497-44a7fdb9c1b7">
+<div class="content">
+<span class="tag">Medicine</span>
+<h6>Dashmool</h6>
+<p>Joint pain relief medicine.</p>
+<div class="benefits"><span>Joint Pain</span><span>Inflammation</span></div>
+</div>
+</div>
+
+<!-- 9 -->
+<div class="ayu-card therapy">
+<img src="https://images.unsplash.com/photo-1584467735871-1d7c88f16f3a">
+<div class="content">
+<span class="tag">Therapy</span>
+<h6>Abhyanga</h6>
+<p>Full body oil massage.</p>
+<div class="benefits"><span>Relaxation</span><span>Pain</span></div>
+</div>
+</div>
+
+<!-- 10 -->
+<div class="ayu-card therapy">
+<img src="https://images.unsplash.com/photo-1584466977773-61a4d68b86fd">
+<div class="content">
+<span class="tag">Therapy</span>
+<h6>Panchakarma</h6>
+<p>Deep detox therapy.</p>
+<div class="benefits"><span>Detox</span><span>Rejuvenation</span></div>
+</div>
+</div>
+
+<!-- 11 -->
+<div class="ayu-card therapy">
+<img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c">
+<div class="content">
+<span class="tag">Therapy</span>
+<h6>Shirodhara</h6>
+<p>Oil therapy for mind.</p>
+<div class="benefits"><span>Stress</span><span>Sleep</span></div>
+</div>
+</div>
+
+<!-- 12 -->
+<div class="ayu-card practice">
+<img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b">
+<div class="content">
+<span class="tag">Practice</span>
+<h6>Pranayama</h6>
+<p>Breathing control techniques.</p>
+<div class="benefits"><span>BP</span><span>Stress</span></div>
+</div>
+</div>
+
+<!-- 13 -->
+<div class="ayu-card practice">
+<img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773">
+<div class="content">
+<span class="tag">Practice</span>
+<h6>Meditation</h6>
+<p>Mental relaxation practice.</p>
+<div class="benefits"><span>Focus</span><span>Sleep</span></div>
+</div>
+</div>
+
+<!-- 14 -->
+<div class="ayu-card practice">
+<img src="https://images.unsplash.com/photo-1552058544-f2b08422138a">
+<div class="content">
+<span class="tag">Practice</span>
+<h6>Yoga Asanas</h6>
+<p>Physical balance postures.</p>
+<div class="benefits"><span>Flexibility</span><span>Strength</span></div>
+</div>
+</div>
+
+<!-- 15 -->
+<div class="ayu-card practice">
+<img src="https://images.unsplash.com/photo-1554344058-9fba2d8c3f16">
+<div class="content">
+<span class="tag">Practice</span>
+<h6>Surya Namaskar</h6>
+<p>Complete body activation.</p>
+<div class="benefits"><span>Energy</span><span>Fitness</span></div>
+</div>
+</div>
+
+<!-- 16 -->
+<div class="ayu-card herb">
+<img src="https://images.unsplash.com/photo-1600678739381-07d6b2418b70">
+<div class="content">
+<span class="tag">Herb</span>
+<h6>Brahmi</h6>
+<p>Brain tonic herb.</p>
+<div class="benefits"><span>Memory</span><span>Focus</span></div>
+</div>
+</div>
+
+<!-- 17 -->
+<div class="ayu-card herb">
+<img src="https://images.unsplash.com/photo-1611078489935-0cb964de46d1">
+<div class="content">
+<span class="tag">Herb</span>
+<h6>Shatavari</h6>
+<p>Hormonal balance herb.</p>
+<div class="benefits"><span>Women's Health</span></div>
+</div>
+</div>
+
+<!-- 18 -->
+<div class="ayu-card medicine">
+<img src="https://images.unsplash.com/photo-1586015559305-6a7c42c3c85d">
+<div class="content">
+<span class="tag">Medicine</span>
+<h6>Arjunarishta</h6>
+<p>Heart health tonic.</p>
+<div class="benefits"><span>Heart</span><span>BP</span></div>
+</div>
+</div>
+
+<!-- 19 -->
+<div class="ayu-card therapy">
+<img src="https://images.unsplash.com/photo-1584466991233-48b61c1c1b21">
+<div class="content">
+<span class="tag">Therapy</span>
+<h6>Nasya</h6>
+<p>Nasal detox therapy.</p>
+<div class="benefits"><span>Sinus</span><span>Migraine</span></div>
+</div>
+</div>
+
+<!-- 20 -->
+<div class="ayu-card practice">
+<img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3">
+<div class="content">
+<span class="tag">Practice</span>
+<h6>Ayurvedic Diet</h6>
+<p>Dosha-based food habits.</p>
+<div class="benefits"><span>Digestion</span><span>Immunity</span></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+function filterCards(type){
+    let cards=document.querySelectorAll(".ayu-card");
+    cards.forEach(card=>{
+        if(type=="all" || card.classList.contains(type)){
+            card.style.display="block";
+        }else{
+            card.style.display="none";
+        }
+    });
+}
+
+document.getElementById("search").addEventListener("keyup",function(){
+    let value=this.value.toLowerCase();
+    document.querySelectorAll(".ayu-card").forEach(card=>{
+        card.style.display=card.innerText.toLowerCase().includes(value)?"block":"none";
+    });
+});
+</script>
+<!-- FOOTER -->
+<footer style="background:#184d37;color:#fff;margin-top:60px;">
+  <div class="container py-5">
+    <div class="row">
+
+      <!-- Brand -->
+      <div class="col-lg-4 mb-4">
+        <h5 class="fw-bold">🌿 Sanskriti Ayurveda</h5>
+        <p class="small mt-2">
+          A traditional health intelligence platform empowering wellness through
+          ancient Indian healing wisdom blended with modern technology.
+        </p>
+      </div>
+
+      <!-- Explore -->
+      <div class="col-lg-3 mb-4">
+        <h6 class="fw-semibold">Explore</h6>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-white text-decoration-none">Ayurveda</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Yoga</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Remedies</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Traditional Food</a></li>
+        </ul>
+      </div>
+
+      <!-- Account -->
+      <div class="col-lg-2 mb-4">
+        <h6 class="fw-semibold">Account</h6>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-white text-decoration-none">Login</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Register</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Dashboard</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-lg-3 mb-4">
+        <h6 class="fw-semibold">Contact</h6>
+        <p class="small mb-1">📧 support@sanskritiayurveda.com</p>
+        <p class="small mb-1">📞 +91 98765 43210</p>
+        <p class="small">📍 India</p>
+      </div>
+
+    </div>
+
+    <hr style="border-color:rgba(255,255,255,0.3)">
+
+    <div class="text-center small">
+      © 2026 Sanskriti Ayurveda | All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

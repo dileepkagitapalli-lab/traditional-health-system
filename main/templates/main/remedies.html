@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanskriti Ayurveda | Remedies</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    background:#f6faf7;
+    font-family:'Poppins',sans-serif;
+}
+
+/* NAVBAR */
+.navbar{background:#184d37;}
+.navbar a{color:#fff!important}
+
+/* HEADER */
+.page-header{
+    text-align:center;
+    padding:90px 15px 35px;
+}
+.page-header h1{font-weight:700;color:#184d37}
+.page-header p{color:#666}
+
+/* SEARCH */
+.search-box{max-width:650px;margin:auto}
+
+/* FILTERS */
+.filter-btns button{
+    border-radius:20px;
+    margin:5px;
+}
+
+/* GRID */
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:22px;
+}
+
+/* CARD */
+.rem-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    transition:0.4s;
+}
+.rem-card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 18px 35px rgba(0,0,0,0.18);
+}
+.rem-card img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+}
+.content{padding:15px}
+.tag{
+    display:inline-block;
+    background:#e4f5ee;
+    color:#184d37;
+    font-size:12px;
+    padding:4px 12px;
+    border-radius:20px;
+    margin-bottom:6px;
+}
+.rem-card h6{font-weight:600}
+.benefits span{
+    background:#f1f1f1;
+    border-radius:12px;
+    padding:3px 10px;
+    font-size:11px;
+    margin:2px;
+    display:inline-block;
+}
+
+/* FOOTER */
+footer{
+    background:#184d37;
+    color:#fff;
+    margin-top:80px;
+    padding:50px 0 20px;
+}
+footer h6{font-weight:600;margin-bottom:15px}
+footer a{color:#cfe7dd;text-decoration:none;font-size:14px}
+footer a:hover{text-decoration:underline}
+.footer-bottom{text-align:center;margin-top:30px;font-size:13px;color:#cfe7dd}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+<div class="container">
+<a class="navbar-brand fw-bold" href="/">🌿 Sanskriti Ayurveda</a>
+</div>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header">
+<h1>Natural Home Remedies</h1>
+<p>Traditional solutions for daily health problems</p>
+
+<div class="search-box mt-3">
+<input type="text" id="search" class="form-control form-control-lg" placeholder="Search disease, symptom, or remedy...">
+</div>
+
+<div class="filter-btns mt-3">
+<button class="btn btn-success" onclick="filterCards('all')">All</button>
+<button class="btn btn-outline-success" onclick="filterCards('cold')">Cold & Cough</button>
+<button class="btn btn-outline-success" onclick="filterCards('fever')">Fever</button>
+<button class="btn btn-outline-success" onclick="filterCards('digest')">Digestion</button>
+<button class="btn btn-outline-success" onclick="filterCards('skin')">Skin</button>
+<button class="btn btn-outline-success" onclick="filterCards('hair')">Hair Care</button>
+<button class="btn btn-outline-success" onclick="filterCards('immunity')">Immunity</button>
+</div>
+</div>
+
+<!-- CONTENT -->
+<div class="container pb-5">
+<div class="card-grid" id="cardGrid">
+
+<!-- 20 FULL REMEDY CARDS -->
+
+<div class="rem-card cold">
+<img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574">
+<div class="content">
+<span class="tag">Cold & Cough</span>
+<h6>Honey Ginger Tea</h6>
+<p>Relieves sore throat and congestion.</p>
+<div class="benefits"><span>Soothing</span><span>Anti-inflammatory</span></div>
+</div>
+</div>
+
+<div class="rem-card fever">
+<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd">
+<div class="content">
+<span class="tag">Fever</span>
+<h6>Tulsi Kadha</h6>
+<p>Boosts immunity and reduces fever.</p>
+<div class="benefits"><span>Antiviral</span><span>Detox</span></div>
+</div>
+</div>
+
+<div class="rem-card digest">
+<img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924">
+<div class="content">
+<span class="tag">Digestion</span>
+<h6>Jeera Water</h6>
+<p>Improves digestion and metabolism.</p>
+<div class="benefits"><span>Detox</span><span>Bloating relief</span></div>
+</div>
+</div>
+
+<div class="rem-card skin">
+<img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6">
+<div class="content">
+<span class="tag">Skin</span>
+<h6>Aloe Vera Face Pack</h6>
+<p>Natural glow and acne reduction.</p>
+<div class="benefits"><span>Cooling</span><span>Hydration</span></div>
+</div>
+</div>
+
+<div class="rem-card hair">
+<img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
+<div class="content">
+<span class="tag">Hair Care</span>
+<h6>Amla Oil Massage</h6>
+<p>Prevents hair fall and greying.</p>
+<div class="benefits"><span>Hair growth</span><span>Strength</span></div>
+</div>
+</div>
+
+<div class="rem-card immunity">
+<img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3">
+<div class="content">
+<span class="tag">Immunity</span>
+<h6>Turmeric Milk</h6>
+<p>Strengthens immunity and reduces inflammation.</p>
+<div class="benefits"><span>Immunity boost</span><span>Recovery</span></div>
+</div>
+</div>
+
+<div class="rem-card cold">
+<img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9">
+<div class="content">
+<span class="tag">Cold & Cough</span>
+<h6>Steam Inhalation</h6>
+<p>Clears nasal congestion.</p>
+<div class="benefits"><span>Sinus relief</span><span>Breathing</span></div>
+</div>
+</div>
+
+<div class="rem-card fever">
+<img src="https://images.unsplash.com/photo-1604908177522-040d1dcdc11f">
+<div class="content">
+<span class="tag">Fever</span>
+<h6>Coriander Seed Drink</h6>
+<p>Natural fever reducer.</p>
+<div class="benefits"><span>Cooling</span><span>Detox</span></div>
+</div>
+</div>
+
+<div class="rem-card digest">
+<img src="https://images.unsplash.com/photo-1562967916-eb82221dfb36">
+<div class="content">
+<span class="tag">Digestion</span>
+<h6>Triphala Water</h6>
+<p>Improves bowel movement.</p>
+<div class="benefits"><span>Laxative</span><span>Clean gut</span></div>
+</div>
+</div>
+
+<div class="rem-card skin">
+<img src="https://images.unsplash.com/photo-1556228578-4c7d76daba55">
+<div class="content">
+<span class="tag">Skin</span>
+<h6>Neem Face Pack</h6>
+<p>Controls acne and pimples.</p>
+<div class="benefits"><span>Antibacterial</span><span>Oil control</span></div>
+</div>
+</div>
+
+<div class="rem-card hair">
+<img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2">
+<div class="content">
+<span class="tag">Hair Care</span>
+<h6>Coconut Oil Therapy</h6>
+<p>Nourishes scalp deeply.</p>
+<div class="benefits"><span>Moisture</span><span>Strength</span></div>
+</div>
+</div>
+
+<div class="rem-card immunity">
+<img src="https://images.unsplash.com/photo-1556911073-52527ac437f5">
+<div class="content">
+<span class="tag">Immunity</span>
+<h6>Chyawanprash</h6>
+<p>Boosts body resistance.</p>
+<div class="benefits"><span>Energy</span><span>Vitality</span></div>
+</div>
+</div>
+
+<div class="rem-card cold">
+<img src="https://images.unsplash.com/photo-1514996937319-344454492b37">
+<div class="content">
+<span class="tag">Cold & Cough</span>
+<h6>Black Pepper Tea</h6>
+<p>Relieves throat irritation.</p>
+<div class="benefits"><span>Warmth</span><span>Relief</span></div>
+</div>
+</div>
+
+<div class="rem-card fever">
+<img src="https://images.unsplash.com/photo-1524592950408-8eafc5888a69">
+<div class="content">
+<span class="tag">Fever</span>
+<h6>Mint Lemon Drink</h6>
+<p>Hydration and cooling.</p>
+<div class="benefits"><span>Cooling</span><span>Refresh</span></div>
+</div>
+</div>
+
+<div class="rem-card digest">
+<img src="https://images.unsplash.com/photo-1604908177047-2735f06b78b6">
+<div class="content">
+<span class="tag">Digestion</span>
+<h6>Buttermilk Therapy</h6>
+<p>Improves gut bacteria.</p>
+<div class="benefits"><span>Probiotic</span><span>Light</span></div>
+</div>
+</div>
+
+<div class="rem-card skin">
+<img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357">
+<div class="content">
+<span class="tag">Skin</span>
+<h6>Rose Water Spray</h6>
+<p>Natural skin toner.</p>
+<div class="benefits"><span>Hydration</span><span>Glow</span></div>
+</div>
+</div>
+
+<div class="rem-card hair">
+<img src="https://images.unsplash.com/photo-1615485290484-f1f345962f8d">
+<div class="content">
+<span class="tag">Hair Care</span>
+<h6>Onion Juice Pack</h6>
+<p>Stimulates hair regrowth.</p>
+<div class="benefits"><span>Growth</span><span>Strength</span></div>
+</div>
+</div>
+
+<div class="rem-card immunity">
+<img src="https://images.unsplash.com/photo-1506086679525-9c3fdbcb0a5a">
+<div class="content">
+<span class="tag">Immunity</span>
+<h6>Giloy Juice</h6>
+<p>Strong immunity booster.</p>
+<div class="benefits"><span>Detox</span><span>Resistance</span></div>
+</div>
+</div>
+
+<div class="rem-card immunity">
+<img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924">
+<div class="content">
+<span class="tag">Immunity</span>
+<h6>Dry Fruits Mix</h6>
+<p>Daily nutrition tonic.</p>
+<div class="benefits"><span>Energy</span><span>Strength</span></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#184d37;color:#fff;margin-top:60px;">
+  <div class="container py-5">
+    <div class="row">
+
+      <!-- Brand -->
+      <div class="col-lg-4 mb-4">
+        <h5 class="fw-bold">🌿 Sanskriti Ayurveda</h5>
+        <p class="small mt-2">
+          A traditional health intelligence platform empowering wellness through
+          ancient Indian healing wisdom blended with modern technology.
+        </p>
+      </div>
+
+      <!-- Explore -->
+      <div class="col-lg-3 mb-4">
+        <h6 class="fw-semibold">Explore</h6>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-white text-decoration-none">Ayurveda</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Yoga</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Remedies</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Traditional Food</a></li>
+        </ul>
+      </div>
+
+      <!-- Account -->
+      <div class="col-lg-2 mb-4">
+        <h6 class="fw-semibold">Account</h6>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-white text-decoration-none">Login</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Register</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Dashboard</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-lg-3 mb-4">
+        <h6 class="fw-semibold">Contact</h6>
+        <p class="small mb-1">📧 support@sanskritiayurveda.com</p>
+        <p class="small mb-1">📞 +91 98765 43210</p>
+        <p class="small">📍 India</p>
+      </div>
+
+    </div>
+
+    <hr style="border-color:rgba(255,255,255,0.3)">
+
+    <div class="text-center small">
+      © 2026 Sanskriti Ayurveda | All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+<script>
+function filterCards(type){
+    let cards=document.querySelectorAll(".rem-card");
+    cards.forEach(card=>{
+        if(type==="all" || card.classList.contains(type)){
+            card.style.display="block";
+        }else{
+            card.style.display="none";
+        }
+    });
+}
+
+document.getElementById("search").addEventListener("keyup",function(){
+    let value=this.value.toLowerCase();
+    document.querySelectorAll(".rem-card").forEach(card=>{
+        card.style.display=card.innerText.toLowerCase().includes(value)?"block":"none";
+    });
+});
+</script>
+
+</body>
+</html>
