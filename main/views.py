@@ -20,3 +20,6 @@ def yoga(request):
 
 def remedies(request):
     return render(request, 'main/remedies.html')
+
+def food(request):   # 👈 MUST BE EXACTLY THIS
+    return render(request, 'main/food.html')
