@@ -20,6 +20,3 @@ def yoga(request):
 
 def remedies(request):
     return render(request, 'main/remedies.html')
-
-def food(request):
-    return render(request, 'main/food.html')
