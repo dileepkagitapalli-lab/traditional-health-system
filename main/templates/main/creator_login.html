@@ -13,7 +13,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
 body{
     min-height:100vh;
@@ -24,55 +29,72 @@ body{
     overflow:hidden;
 }
 
-/* Floating Leaves */
+/* Falling Leaves */
 .leaves span{
     position:absolute;
-    top:-50px;
-    width:25px;
-    height:25px;
-    background:url('https://cdn-icons-png.flaticon.com/512/2909/2909767.png');
+    top:-60px;
+    width:30px;
+    height:30px;
+    background:url('https://pngimg.com/d/leaf_PNG36819.png');
     background-size:cover;
-    opacity:0.85;
+    opacity:0.6;
     animation:fall linear infinite;
 }
 
 @keyframes fall{
-    0%{transform:translateY(-50px) rotate(0deg);}
+    0%{transform:translateY(-60px) rotate(0deg);}
     100%{transform:translateY(110vh) rotate(360deg);}
 }
 
-/* Glass Card */
+/* Main Card */
 .login-box{
-    width:420px;
-    padding:40px 35px;
+    width:900px;
+    max-width:95%;
     background: rgba(255,255,255,0.18);
-    backdrop-filter: blur(15px);
-    border-radius:22px;
-    box-shadow:0 25px 50px rgba(0,0,0,0.25);
-    text-align:center;
-    animation: fade 1s ease;
+    backdrop-filter: blur(18px);
+    border-radius:24px;
+    box-shadow:0 30px 60px rgba(0,0,0,0.25);
+    display:flex;
+    overflow:hidden;
 }
 
-@keyframes fade{
-    from{opacity:0; transform:translateY(20px);}
-    to{opacity:1; transform:translateY(0);}
+/* Left Panel */
+.left-panel{
+    flex:1;
+    background:linear-gradient(135deg,#2f6f4e,#1e4d2b);
+    color:#fff;
+    padding:60px 50px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
-.logo{
-    font-size:26px;
+.left-panel h2{
     font-weight:600;
-    color:#1e4d2b;
+    font-size:32px;
 }
 
-.sub{
-    font-size:13px;
-    opacity:0.7;
+.left-panel p{
+    opacity:0.85;
+    font-size:15px;
+}
+
+/* Right Panel */
+.right-panel{
+    flex:1;
+    padding:60px 60px;
+    background:rgba(255,255,255,0.25);
 }
 
 .form-control,.form-select{
     border-radius:12px;
     padding:12px 14px;
-    background:rgba(255,255,255,0.8);
+    background:rgba(255,255,255,0.9);
+}
+
+.form-control:focus,.form-select:focus{
+    box-shadow:0 0 0 0.2rem rgba(90,143,106,0.25);
+    border-color:#5a8f6a;
 }
 
 .btn-login{
@@ -86,15 +108,21 @@ body{
 }
 
 .btn-login:hover{
-    transform:translateY(-2px) scale(1.02);
-    box-shadow:0 12px 25px rgba(0,0,0,0.25);
+    transform:translateY(-2px);
+    box-shadow:0 15px 30px rgba(0,0,0,0.25);
 }
 
 /* Responsive */
-@media(max-width:500px){
+@media(max-width:768px){
     .login-box{
-        width:95%;
-        padding:30px 25px;
+        flex-direction:column;
+    }
+    .left-panel{
+        text-align:center;
+        padding:40px;
+    }
+    .right-panel{
+        padding:40px;
     }
 }
 </style>
@@ -102,63 +130,75 @@ body{
 
 <body>
 
-<!-- Falling Leaves -->
+<!-- Leaves -->
 <div class="leaves"></div>
 
-<!-- Login Card -->
 <div class="login-box">
 
-    <div class="mb-3">
-        <div class="logo">🌿 Sanskriti Ayurveda</div>
-        <div class="sub">Creator Login Panel</div>
+    <!-- Left Branding -->
+    <div class="left-panel">
+        <h2>🌿 Sanskriti Ayurveda</h2>
+        <p class="mt-3">
+            Creator Management Portal <br>
+            Share knowledge on Ayurveda, Yoga & Natural Remedies.
+        </p>
     </div>
 
-    <form method="post">
-        {% csrf_token %}
+    <!-- Right Form -->
+    <div class="right-panel">
+        <h4 class="mb-4 text-success fw-semibold">Creator Login</h4>
 
-        <div class="mb-3 text-start">
-            <label class="form-label">Email / Username</label>
-            <input type="text" class="form-control" placeholder="Enter email or username" required>
-        </div>
+        <form method="post">
+            {% csrf_token %}
 
-        <div class="mb-3 text-start">
-            <label class="form-label">Password</label>
-            <div class="input-group">
-                <input type="password" id="pass" class="form-control" placeholder="Enter password" required>
-                <span class="input-group-text bg-white" onclick="toggle()">
-                    <i class="bi bi-eye"></i>
-                </span>
+            <div class="mb-3">
+                <label class="form-label">Email / Username</label>
+                <input type="text" class="form-control" required>
             </div>
-        </div>
 
-        <!-- Creator Type -->
-        <div class="mb-3 text-start">
-            <label class="form-label">Creator Type</label>
-            <select class="form-select" onchange="otherField(this.value)" required>
-                <option value="">Select creator category</option>
-                <option>Doctor</option>
-                <option>Content Creator</option>
-                <option>Health Analyst</option>
-                <option>Ayurveda Practitioner</option>
-                <option>Fitness Expert</option>
-                <option>Yoga Trainer</option>
-                <option>Nutritionist</option>
-                <option>Researcher</option>
-                <option value="other">Others</option>
-            </select>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <div class="input-group">
+                    <input type="password" id="pass" class="form-control" required>
+                    <span class="input-group-text bg-white" onclick="toggle()" style="cursor:pointer;">
+                        <i class="bi bi-eye"></i>
+                    </span>
+                </div>
+            </div>
 
-        <!-- Hidden Field -->
-        <div class="mb-3 text-start d-none" id="otherInput">
-            <label class="form-label">What type of creator are you?</label>
-            <input type="text" class="form-control" placeholder="Enter your specialization">
-        </div>
+            <!-- Creator Type -->
+            <div class="mb-3">
+                <label class="form-label">Creator Type</label>
+                <select class="form-select" onchange="otherField(this.value)" required>
+                    <option value="">Select creator category</option>
+                    <option>Doctor</option>
+                    <option>Content Creator</option>
+                    <option>Health Analyst</option>
+                    <option>Ayurveda Practitioner</option>
+                    <option>Fitness Expert</option>
+                    <option>Yoga Trainer</option>
+                    <option>Nutritionist</option>
+                    <option>Researcher</option>
+                    <option value="other">Others</option>
+                </select>
+            </div>
 
-        <button class="btn btn-login w-100">Creator Sign In</button>
+            <!-- Other Field -->
+            <div class="mb-3 d-none" id="otherInput">
+                <label class="form-label">Specify Creator Type</label>
+                <input type="text" class="form-control" placeholder="Enter your specialization">
+            </div>
 
-        <p class="mt-3 mb-0">Not registered? <a href="#">Apply as Creator</a></p>
+            <button type="submit" class="btn btn-login w-100">
+                Creator Sign In
+            </button>
 
-    </form>
+            <p class="mt-3">Not registered? 
+                <a href="#" class="text-decoration-none">Apply as Creator</a>
+            </p>
+
+        </form>
+    </div>
 
 </div>
 
@@ -174,13 +214,13 @@ function otherField(val){
 }
 
 /* Leaves Animation */
-for(let i=0;i<28;i++){
+for(let i=0;i<20;i++){
     let leaf=document.createElement("span");
-    let size=Math.random()*20+12;
+    let size=Math.random()*25+15;
     leaf.style.width=size+"px";
     leaf.style.height=size+"px";
     leaf.style.left=Math.random()*100+"vw";
-    leaf.style.animationDuration=Math.random()*12+6+"s";
+    leaf.style.animationDuration=Math.random()*10+8+"s";
     document.querySelector(".leaves").appendChild(leaf);
 }
 </script>

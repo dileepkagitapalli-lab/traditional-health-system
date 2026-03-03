@@ -289,21 +289,31 @@ footer a:hover {
 </button>
 <div class="collapse navbar-collapse" id="navMenu">
 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-<li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+<li class="nav-item">
+    <a class="nav-link active" href="#home">Home</a>
+</li>
+
 <li class="nav-item">
     <a class="nav-link" href="{% url 'ayurveda' %}">Ayurveda</a>
 </li>
+
 <li class="nav-item">
     <a href="{% url 'yoga' %}" class="nav-link">Yoga</a>
 </li>
+
 <li class="nav-item">
     <a class="nav-link" href="{% url 'remedies' %}">Remedies</a>
 </li>
+
 <li class="nav-item">
     <a class="nav-link" href="{% url 'food' %}">Traditional Food</a>
 </li>
+
 <li class="nav-item dropdown login-dropdown">
-    <a class="nav-link btn btn-accent ms-2 dropdown-toggle" href="#" id="loginDropdown">
+    <a class="nav-link btn btn-accent ms-2 dropdown-toggle" 
+       href="#" 
+       id="loginDropdown"
+       data-bs-toggle="dropdown">
         Login
     </a>
     <ul class="dropdown-menu shadow">
@@ -312,8 +322,6 @@ footer a:hover {
         <li><a class="dropdown-item" href="{% url 'admin_login' %}">🛡 Admin Login</a></li>
     </ul>
 </li>
-
-<li class="nav-item"><a class="nav-link btn btn-outline-light ms-2" href="#">Register</a></li>
 </ul>
 </div>
 </div>
@@ -359,44 +367,50 @@ footer a:hover {
 <!-- CORE PILLARS -->
 <section id="ayurveda" class="section-light container-fluid py-5">
 <h2 class="section-title">Our Core Pillars</h2>
-<div class="pillar-container px-5">
-    <div class="feature-card">
-    <i class="bi bi-flower1"></i>
-    <h5 class="mt-3">Ayurveda</h5>
-    <p>Ancient healing techniques using herbs and natural therapies.</p>
+<div class="row g-4 justify-content-center px-5">
 
-    <div class="feature-extra">
-        <p>
-            Ayurveda focuses on balancing the three doshas — Vata, Pitta, and Kapha — 
-            using herbs, diet, lifestyle, and detox therapies to ensure complete wellness.
-        </p>
+    <div class="col-md-4">
+        <div class="feature-card">
+            <i class="bi bi-flower1"></i>
+            <h5 class="mt-3">Ayurveda</h5>
+            <p>Ancient healing techniques using herbs and natural therapies.</p>
+            <div class="feature-extra">
+                <p>
+                    Ayurveda focuses on balancing the three doshas — Vata, Pitta, and Kapha — 
+                    using herbs, diet, lifestyle, and detox therapies to ensure complete wellness.
+                </p>
+            </div>
+        </div>
     </div>
-</div>
-<div class="feature-card">
-    <i class="bi bi-person-arms-up"></i>
-    <h5 class="mt-3">Yoga & Pranayama</h5>
-    <p>Balance body and mind through yoga and breathing practices.</p>
 
-    <div class="feature-extra">
-        <p>
-            Includes asanas, breathing techniques, and meditation practices that improve 
-            flexibility, concentration, emotional stability, and mental peace.
-        </p>
+    <div class="col-md-4">
+        <div class="feature-card">
+            <i class="bi bi-person-arms-up"></i>
+            <h5 class="mt-3">Yoga & Pranayama</h5>
+            <p>Balance body and mind through yoga and breathing practices.</p>
+            <div class="feature-extra">
+                <p>
+                    Includes asanas, breathing techniques, and meditation practices that improve 
+                    flexibility, concentration, emotional stability, and mental peace.
+                </p>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="feature-card">
-    <i class="bi bi-heart-pulse"></i>
-    <h5 class="mt-3">Home Remedies</h5>
-    <p>Simple and effective remedies passed through generations.</p>
-
-    <div class="feature-extra">
-        <p>
-            Traditional Indian household remedies using kitchen ingredients 
-            to treat common health issues naturally and safely.
-        </p>
+    <div class="col-md-4">
+        <div class="feature-card">
+            <i class="bi bi-heart-pulse"></i>
+            <h5 class="mt-3">Home Remedies</h5>
+            <p>Simple and effective remedies passed through generations.</p>
+            <div class="feature-extra">
+                <p>
+                    Traditional Indian household remedies using kitchen ingredients 
+                    to treat common health issues naturally and safely.
+                </p>
+            </div>
+        </div>
     </div>
-</div>
+
 </div>
 </section>
 
