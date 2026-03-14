@@ -1,229 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sanskriti Ayurveda | Creator Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanskriti Ayurveda | {% if login_form_active %}Creator Login{% else %}Creator Registration{% endif %}</title>
 
-<!-- Bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-body{
-    min-height:100vh;
-    background: linear-gradient(120deg,#5a8f6a,#e8e0d0);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-}
+        body {
+            min-height: 100vh;
+            background: linear-gradient(120deg, #5a8f6a, #e8e0d0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
-/* Falling Leaves */
-.leaves span{
-    position:absolute;
-    top:-60px;
-    width:30px;
-    height:30px;
-    background:url('https://pngimg.com/d/leaf_PNG36819.png');
-    background-size:cover;
-    opacity:0.6;
-    animation:fall linear infinite;
-}
+        /* Falling Leaves */
+        .leaves span {
+            position: absolute;
+            top: -60px;
+            width: 30px;
+            height: 30px;
+            background: url('https://pngimg.com/d/leaf_PNG36819.png');
+            background-size: cover;
+            opacity: 0.6;
+            animation: fall linear infinite;
+        }
 
-@keyframes fall{
-    0%{transform:translateY(-60px) rotate(0deg);}
-    100%{transform:translateY(110vh) rotate(360deg);}
-}
+        @keyframes fall {
+            0% {
+                transform: translateY(-60px) rotate(0deg);
+            }
 
-/* Main Card */
-.login-box{
-    width:900px;
-    max-width:95%;
-    background: rgba(255,255,255,0.18);
-    backdrop-filter: blur(18px);
-    border-radius:24px;
-    box-shadow:0 30px 60px rgba(0,0,0,0.25);
-    display:flex;
-    overflow:hidden;
-}
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
 
-/* Left Panel */
-.left-panel{
-    flex:1;
-    background:linear-gradient(135deg,#2f6f4e,#1e4d2b);
-    color:#fff;
-    padding:60px 50px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
+        /* Main Card */
+        .login-box {
+            width: 900px;
+            max-width: 95%;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(18px);
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+            display: flex;
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
 
-.left-panel h2{
-    font-weight:600;
-    font-size:32px;
-}
+        /* Left Panel */
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #2f6f4e, #1e4d2b);
+            color: #fff;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.left-panel p{
-    opacity:0.85;
-    font-size:15px;
-}
+        .left-panel h2 {
+            font-weight: 600;
+            font-size: 32px;
+        }
 
-/* Right Panel */
-.right-panel{
-    flex:1;
-    padding:60px 60px;
-    background:rgba(255,255,255,0.25);
-}
+        .left-panel p {
+            opacity: 0.85;
+            font-size: 15px;
+        }
 
-.form-control,.form-select{
-    border-radius:12px;
-    padding:12px 14px;
-    background:rgba(255,255,255,0.9);
-}
+        /* Right Panel */
+        .right-panel {
+            flex: 1;
+            padding: 40px 60px;
+            background: rgba(255, 255, 255, 0.25);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.form-control:focus,.form-select:focus{
-    box-shadow:0 0 0 0.2rem rgba(90,143,106,0.25);
-    border-color:#5a8f6a;
-}
+        .form-control,
+        .form-select,
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            border-radius: 12px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ced4da;
+            display: block;
+            width: 100%;
+        }
 
-.btn-login{
-    background: linear-gradient(45deg,#2f6f4e,#e69a5a);
-    border:none;
-    color:#fff;
-    padding:12px;
-    border-radius:14px;
-    font-weight:500;
-    transition:0.4s;
-}
+        .form-control:focus,
+        .form-select:focus,
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(90, 143, 106, 0.25);
+            border-color: #5a8f6a;
+        }
 
-.btn-login:hover{
-    transform:translateY(-2px);
-    box-shadow:0 15px 30px rgba(0,0,0,0.25);
-}
+        .btn-login {
+            background: linear-gradient(45deg, #2f6f4e, #e69a5a);
+            border: none;
+            color: #fff;
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: 500;
+            transition: 0.4s;
+        }
 
-/* Responsive */
-@media(max-width:768px){
-    .login-box{
-        flex-direction:column;
-    }
-    .left-panel{
-        text-align:center;
-        padding:40px;
-    }
-    .right-panel{
-        padding:40px;
-    }
-}
-</style>
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            color: white;
+        }
+
+        /* Responsive */
+        @media(max-width:768px) {
+            .login-box {
+                flex-direction: column;
+            }
+
+            .left-panel {
+                text-align: center;
+                padding: 40px;
+            }
+
+            .right-panel {
+                padding: 40px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- Leaves -->
-<div class="leaves"></div>
+    <!-- Leaves -->
+    <div class="leaves"></div>
 
-<div class="login-box">
+    <div class="login-box">
 
-    <!-- Left Branding -->
-    <div class="left-panel">
-        <h2>🌿 Sanskriti Ayurveda</h2>
-        <p class="mt-3">
-            Creator Management Portal <br>
-            Share knowledge on Ayurveda, Yoga & Natural Remedies.
-        </p>
-    </div>
+        <!-- Left Branding -->
+        <div class="left-panel">
+            <h2>🌿 Sanskriti Ayurveda</h2>
+            <p class="mt-3">
+                Creator Management Portal <br>
+                Share knowledge on Ayurveda, Yoga & Natural Remedies.
+            </p>
+        </div>
 
-    <!-- Right Form -->
-    <div class="right-panel">
-        <h4 class="mb-4 text-success fw-semibold">Creator Login</h4>
+        <!-- Right Form -->
+        <div class="right-panel">
 
-        <form method="post">
-            {% csrf_token %}
-
-            <div class="mb-3">
-                <label class="form-label">Email / Username</label>
-                <input type="text" class="form-control" required>
+            <!-- Alerts for Django Messages -->
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+            {% endfor %}
+            {% endif %}
 
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <div class="input-group">
-                    <input type="password" id="pass" class="form-control" required>
-                    <span class="input-group-text bg-white" onclick="toggle()" style="cursor:pointer;">
-                        <i class="bi bi-eye"></i>
-                    </span>
+            {% if login_form_active %}
+            <h4 class="mb-4 text-success fw-semibold">Creator Login</h4>
+
+            <form method="post" action="{% url 'creator_login' %}">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label" for="id_username">Email / Username</label>
+                    <input type="text" name="username" id="id_username" class="form-control" required>
                 </div>
-            </div>
 
-            <!-- Creator Type -->
-            <div class="mb-3">
-                <label class="form-label">Creator Type</label>
-                <select class="form-select" onchange="otherField(this.value)" required>
-                    <option value="">Select creator category</option>
-                    <option>Doctor</option>
-                    <option>Content Creator</option>
-                    <option>Health Analyst</option>
-                    <option>Ayurveda Practitioner</option>
-                    <option>Fitness Expert</option>
-                    <option>Yoga Trainer</option>
-                    <option>Nutritionist</option>
-                    <option>Researcher</option>
-                    <option value="other">Others</option>
-                </select>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <div class="input-group">
+                        <input type="password" name="password" id="pass" class="form-control"
+                            style="border-radius: 12px 0 0 12px;" required>
+                        <span class="input-group-text bg-white" onclick="toggle()"
+                            style="cursor:pointer; border-radius: 0 12px 12px 0;">
+                            <i class="bi bi-eye"></i>
+                        </span>
+                    </div>
+                </div>
 
-            <!-- Other Field -->
-            <div class="mb-3 d-none" id="otherInput">
-                <label class="form-label">Specify Creator Type</label>
-                <input type="text" class="form-control" placeholder="Enter your specialization">
-            </div>
+                <button type="submit" class="btn btn-login w-100 mt-3">
+                    Creator Sign In
+                </button>
+            </form>
 
-            <button type="submit" class="btn btn-login w-100">
-                Creator Sign In
-            </button>
-
-            <p class="mt-3">Not registered? 
-                <a href="#" class="text-decoration-none">Apply as Creator</a>
+            <p class="mt-3 text-center">Not registered?
+                <a href="{% url 'creator_register' %}"
+                    class="text-decoration-none text-success fw-bold d-inline-block">Apply as Creator</a>
             </p>
 
-        </form>
+            {% else %}
+
+            <h4 class="mb-4 text-success fw-semibold">Creator Registration</h4>
+
+            <form method="POST" action="{% url 'creator_register' %}">
+                {% csrf_token %}
+
+                {% for field in register_form %}
+                <div class="mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+
+                <!-- Creator Type UI-Only for Visual Match (No Django DB impact yet) -->
+                <div class="mb-3">
+                    <label class="form-label">Creator Specialty</label>
+                    <select class="form-select" onchange="otherField(this.value)">
+                        <option value="">Select creator category</option>
+                        <option>Doctor</option>
+                        <option>Content Creator</option>
+                        <option>Health Analyst</option>
+                        <option>Ayurveda Practitioner</option>
+                        <option>Fitness Expert</option>
+                        <option>Yoga Trainer</option>
+                        <option>Nutritionist</option>
+                        <option>Researcher</option>
+                        <option value="other">Others</option>
+                    </select>
+                </div>
+
+                <!-- Other Field -->
+                <div class="mb-3 d-none" id="otherInput">
+                    <label class="form-label">Specify Creator Type</label>
+                    <input type="text" class="form-control" placeholder="Enter your specialization">
+                </div>
+
+                <button type="submit" class="btn btn-login w-100 mt-2">
+                    Register as Creator
+                </button>
+            </form>
+
+            <p class="mt-3 text-center">Already a creator? <br />
+                <a href="{% url 'creator_login' %}" class="text-decoration-none text-success">Login here</a>
+            </p>
+
+            {% endif %}
+
+            <div class="text-center mt-2">
+                <a href="{% url 'home' %}" class="text-muted text-decoration-none small"><i
+                        class="bi bi-arrow-left"></i> Back to Home</a>
+            </div>
+        </div>
+
     </div>
 
-</div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-function toggle(){
-    let x = document.getElementById("pass");
-    x.type = x.type === "password" ? "text" : "password";
-}
+    <script>
+        function toggle() {
+            let x = document.getElementById("pass");
+            if (x) {
+                x.type = x.type === "password" ? "text" : "password";
+            }
+        }
 
-function otherField(val){
-    let f = document.getElementById("otherInput");
-    val === "other" ? f.classList.remove("d-none") : f.classList.add("d-none");
-}
+        function otherField(val) {
+            let f = document.getElementById("otherInput");
+            if (f) {
+                val === "other" ? f.classList.remove("d-none") : f.classList.add("d-none");
+            }
+        }
 
-/* Leaves Animation */
-for(let i=0;i<20;i++){
-    let leaf=document.createElement("span");
-    let size=Math.random()*25+15;
-    leaf.style.width=size+"px";
-    leaf.style.height=size+"px";
-    leaf.style.left=Math.random()*100+"vw";
-    leaf.style.animationDuration=Math.random()*10+8+"s";
-    document.querySelector(".leaves").appendChild(leaf);
-}
-</script>
+        /* Leaves Animation */
+        for (let i = 0; i < 20; i++) {
+            let leaf = document.createElement("span");
+            let size = Math.random() * 25 + 15;
+            leaf.style.width = size + "px";
+            leaf.style.height = size + "px";
+            leaf.style.left = Math.random() * 100 + "vw";
+            leaf.style.animationDuration = Math.random() * 10 + 8 + "s";
+            document.querySelector(".leaves").appendChild(leaf);
+        }
+    </script>
 
 </body>
+
 </html>

@@ -1,397 +1,700 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sanskriti Ayurveda | Remedies</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanskriti Ayurveda | Remedies</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f6faf7;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding-top: 80px;
+            /* Space for the fixed navbar */
+        }
 
-<style>
-body{
-    background:#f6faf7;
-    font-family:'Poppins',sans-serif;
-}
+        /* NAVBAR (Matches Ayurveda, Food, Yoga Pages) */
+        .navbar {
+            background: #184d37;
+            padding: 15px 0;
+        }
 
-/* NAVBAR */
-.navbar{background:#184d37;}
-.navbar a{color:#fff!important}
+        .navbar a {
+            color: #fff !important;
+            font-size: 18px;
+        }
 
-/* HEADER */
-.page-header{
-    text-align:center;
-    padding:90px 15px 35px;
-}
-.page-header h1{font-weight:700;color:#184d37}
-.page-header p{color:#666}
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 50px 15px 35px;
+        }
 
-/* SEARCH */
-.search-box{max-width:650px;margin:auto}
+        .page-header h1 {
+            font-weight: 700;
+            color: #184d37
+        }
 
-/* FILTERS */
-.filter-btns button{
-    border-radius:20px;
-    margin:5px;
-}
+        .page-header p {
+            color: #666
+        }
 
-/* GRID */
-.card-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-    gap:22px;
-}
+        /* SEARCH */
+        .search-box {
+            max-width: 650px;
+            margin: auto
+        }
 
-/* CARD */
-.rem-card{
-    background:#fff;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
-    transition:0.4s;
-}
-.rem-card:hover{
-    transform:translateY(-7px);
-    box-shadow:0 18px 35px rgba(0,0,0,0.18);
-}
-.rem-card img{
-    width:100%;
-    height:190px;
-    object-fit:cover;
-}
-.content{padding:15px}
-.tag{
-    display:inline-block;
-    background:#e4f5ee;
-    color:#184d37;
-    font-size:12px;
-    padding:4px 12px;
-    border-radius:20px;
-    margin-bottom:6px;
-}
-.rem-card h6{font-weight:600}
-.benefits span{
-    background:#f1f1f1;
-    border-radius:12px;
-    padding:3px 10px;
-    font-size:11px;
-    margin:2px;
-    display:inline-block;
-}
+        /* FILTERS */
+        .filter-btns button {
+            border-radius: 20px;
+            margin: 5px;
+        }
 
-/* FOOTER */
-footer{
-    background:#184d37;
-    color:#fff;
-    margin-top:80px;
-    padding:50px 0 20px;
-}
-footer h6{font-weight:600;margin-bottom:15px}
-footer a{color:#cfe7dd;text-decoration:none;font-size:14px}
-footer a:hover{text-decoration:underline}
-.footer-bottom{text-align:center;margin-top:30px;font-size:13px;color:#cfe7dd}
-</style>
+        /* GRID */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 22px;
+        }
+
+        /* CARD */
+        .rem-card {
+            background: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rem-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
+        }
+
+        .rem-card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+
+        .content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e4f5ee;
+            color: #184d37;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 6px;
+            width: fit-content;
+        }
+
+        .rem-card h6 {
+            font-weight: 600
+        }
+
+        .benefits span {
+            background: #f1f1f1;
+            border-radius: 12px;
+            padding: 3px 10px;
+            font-size: 11px;
+            margin: 2px;
+            display: inline-block;
+        }
+
+        .icon-row {
+            margin-top: auto;
+            /* pushes icons to bottom */
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            padding-top: 10px;
+        }
+
+        .like-icon,
+        .save-icon {
+            cursor: pointer;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .like-icon:hover,
+        .save-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .like-active {
+            color: red !important;
+        }
+
+        .save-active {
+            color: black !important;
+        }
+
+
+        /* FOOTER */
+        footer {
+            background: #184d37;
+            color: #fff;
+            margin-top: 80px;
+            padding: 50px 0 20px;
+        }
+
+        footer h6 {
+            font-weight: 600;
+            margin-bottom: 15px
+        }
+
+        footer a {
+            color: #cfe7dd;
+            text-decoration: none;
+            font-size: 14px
+        }
+
+        footer a:hover {
+            text-decoration: underline
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 13px;
+            color: #cfe7dd
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg fixed-top">
-<div class="container">
-<a class="navbar-brand fw-bold" href="/">🌿 Sanskriti Ayurveda</a>
-</div>
-</nav>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">🌿 Sanskriti Ayurveda</a>
 
-<!-- HEADER -->
-<div class="page-header">
-<h1>Natural Home Remedies</h1>
-<p>Traditional solutions for daily health problems</p>
+            <ul class="navbar-nav me-auto flex-row align-items-center flex-wrap" style="column-gap: 15px;">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'ayurveda' %}">Ayurveda</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'remedies' %}">Remedies</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'food' %}">Foods</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'yoga' %}">Yoga</a></li>
+            </ul>
+            <ul class="navbar-nav ms-auto flex-row align-items-center flex-wrap" style="column-gap: 15px;">
+                {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'admin_dashboard' %}">Admin DB</a></li>
+                {% elif user.profile.role == 'creator' %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'create_post' %}"><i
+                            class="fa-solid fa-plus me-1"></i>New Post</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'creator_dashboard' %}">Creator DB</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'user_dashboard' %}">My Profile</a></li>
+                {% endif %}
+                <li class="nav-item">
+                    <form action="{% url 'logout' %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link nav-link text-white m-0 p-0"
+                            style="font-size:18px;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'user_login' %}">User Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'creator_login' %}">Creator Login</a></li>
+                <li class="nav-item"><a class="nav-link text-warning fw-bold" href="{% url 'admin_login' %}"><i
+                            class="fa-solid fa-shield-halved"></i> Admin</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
 
-<div class="search-box mt-3">
-<input type="text" id="search" class="form-control form-control-lg" placeholder="Search disease, symptom, or remedy...">
-</div>
+    <!-- HEADER -->
+    <div class="page-header">
+        <h1>Natural Home Remedies</h1>
+        <p>Traditional solutions for daily health problems</p>
 
-<div class="filter-btns mt-3">
-<button class="btn btn-success" onclick="filterCards('all')">All</button>
-<button class="btn btn-outline-success" onclick="filterCards('cold')">Cold & Cough</button>
-<button class="btn btn-outline-success" onclick="filterCards('fever')">Fever</button>
-<button class="btn btn-outline-success" onclick="filterCards('digest')">Digestion</button>
-<button class="btn btn-outline-success" onclick="filterCards('skin')">Skin</button>
-<button class="btn btn-outline-success" onclick="filterCards('hair')">Hair Care</button>
-<button class="btn btn-outline-success" onclick="filterCards('immunity')">Immunity</button>
-</div>
-</div>
+        <div class="search-box mt-3">
+            <input type="text" id="search" class="form-control form-control-lg shadow-sm"
+                placeholder="Search disease, symptom, or remedy...">
+        </div>
 
-<!-- CONTENT -->
-<div class="container pb-5">
-<div class="card-grid" id="cardGrid">
-
-<!-- 20 FULL REMEDY CARDS -->
-
-<div class="rem-card cold">
-<img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574">
-<div class="content">
-<span class="tag">Cold & Cough</span>
-<h6>Honey Ginger Tea</h6>
-<p>Relieves sore throat and congestion.</p>
-<div class="benefits"><span>Soothing</span><span>Anti-inflammatory</span></div>
-</div>
-</div>
-
-<div class="rem-card fever">
-<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd">
-<div class="content">
-<span class="tag">Fever</span>
-<h6>Tulsi Kadha</h6>
-<p>Boosts immunity and reduces fever.</p>
-<div class="benefits"><span>Antiviral</span><span>Detox</span></div>
-</div>
-</div>
-
-<div class="rem-card digest">
-<img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924">
-<div class="content">
-<span class="tag">Digestion</span>
-<h6>Jeera Water</h6>
-<p>Improves digestion and metabolism.</p>
-<div class="benefits"><span>Detox</span><span>Bloating relief</span></div>
-</div>
-</div>
-
-<div class="rem-card skin">
-<img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6">
-<div class="content">
-<span class="tag">Skin</span>
-<h6>Aloe Vera Face Pack</h6>
-<p>Natural glow and acne reduction.</p>
-<div class="benefits"><span>Cooling</span><span>Hydration</span></div>
-</div>
-</div>
-
-<div class="rem-card hair">
-<img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
-<div class="content">
-<span class="tag">Hair Care</span>
-<h6>Amla Oil Massage</h6>
-<p>Prevents hair fall and greying.</p>
-<div class="benefits"><span>Hair growth</span><span>Strength</span></div>
-</div>
-</div>
-
-<div class="rem-card immunity">
-<img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3">
-<div class="content">
-<span class="tag">Immunity</span>
-<h6>Turmeric Milk</h6>
-<p>Strengthens immunity and reduces inflammation.</p>
-<div class="benefits"><span>Immunity boost</span><span>Recovery</span></div>
-</div>
-</div>
-
-<div class="rem-card cold">
-<img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9">
-<div class="content">
-<span class="tag">Cold & Cough</span>
-<h6>Steam Inhalation</h6>
-<p>Clears nasal congestion.</p>
-<div class="benefits"><span>Sinus relief</span><span>Breathing</span></div>
-</div>
-</div>
-
-<div class="rem-card fever">
-<img src="https://images.unsplash.com/photo-1604908177522-040d1dcdc11f">
-<div class="content">
-<span class="tag">Fever</span>
-<h6>Coriander Seed Drink</h6>
-<p>Natural fever reducer.</p>
-<div class="benefits"><span>Cooling</span><span>Detox</span></div>
-</div>
-</div>
-
-<div class="rem-card digest">
-<img src="https://images.unsplash.com/photo-1562967916-eb82221dfb36">
-<div class="content">
-<span class="tag">Digestion</span>
-<h6>Triphala Water</h6>
-<p>Improves bowel movement.</p>
-<div class="benefits"><span>Laxative</span><span>Clean gut</span></div>
-</div>
-</div>
-
-<div class="rem-card skin">
-<img src="https://images.unsplash.com/photo-1556228578-4c7d76daba55">
-<div class="content">
-<span class="tag">Skin</span>
-<h6>Neem Face Pack</h6>
-<p>Controls acne and pimples.</p>
-<div class="benefits"><span>Antibacterial</span><span>Oil control</span></div>
-</div>
-</div>
-
-<div class="rem-card hair">
-<img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2">
-<div class="content">
-<span class="tag">Hair Care</span>
-<h6>Coconut Oil Therapy</h6>
-<p>Nourishes scalp deeply.</p>
-<div class="benefits"><span>Moisture</span><span>Strength</span></div>
-</div>
-</div>
-
-<div class="rem-card immunity">
-<img src="https://images.unsplash.com/photo-1556911073-52527ac437f5">
-<div class="content">
-<span class="tag">Immunity</span>
-<h6>Chyawanprash</h6>
-<p>Boosts body resistance.</p>
-<div class="benefits"><span>Energy</span><span>Vitality</span></div>
-</div>
-</div>
-
-<div class="rem-card cold">
-<img src="https://images.unsplash.com/photo-1514996937319-344454492b37">
-<div class="content">
-<span class="tag">Cold & Cough</span>
-<h6>Black Pepper Tea</h6>
-<p>Relieves throat irritation.</p>
-<div class="benefits"><span>Warmth</span><span>Relief</span></div>
-</div>
-</div>
-
-<div class="rem-card fever">
-<img src="https://images.unsplash.com/photo-1524592950408-8eafc5888a69">
-<div class="content">
-<span class="tag">Fever</span>
-<h6>Mint Lemon Drink</h6>
-<p>Hydration and cooling.</p>
-<div class="benefits"><span>Cooling</span><span>Refresh</span></div>
-</div>
-</div>
-
-<div class="rem-card digest">
-<img src="https://images.unsplash.com/photo-1604908177047-2735f06b78b6">
-<div class="content">
-<span class="tag">Digestion</span>
-<h6>Buttermilk Therapy</h6>
-<p>Improves gut bacteria.</p>
-<div class="benefits"><span>Probiotic</span><span>Light</span></div>
-</div>
-</div>
-
-<div class="rem-card skin">
-<img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357">
-<div class="content">
-<span class="tag">Skin</span>
-<h6>Rose Water Spray</h6>
-<p>Natural skin toner.</p>
-<div class="benefits"><span>Hydration</span><span>Glow</span></div>
-</div>
-</div>
-
-<div class="rem-card hair">
-<img src="https://images.unsplash.com/photo-1615485290484-f1f345962f8d">
-<div class="content">
-<span class="tag">Hair Care</span>
-<h6>Onion Juice Pack</h6>
-<p>Stimulates hair regrowth.</p>
-<div class="benefits"><span>Growth</span><span>Strength</span></div>
-</div>
-</div>
-
-<div class="rem-card immunity">
-<img src="https://images.unsplash.com/photo-1506086679525-9c3fdbcb0a5a">
-<div class="content">
-<span class="tag">Immunity</span>
-<h6>Giloy Juice</h6>
-<p>Strong immunity booster.</p>
-<div class="benefits"><span>Detox</span><span>Resistance</span></div>
-</div>
-</div>
-
-<div class="rem-card immunity">
-<img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924">
-<div class="content">
-<span class="tag">Immunity</span>
-<h6>Dry Fruits Mix</h6>
-<p>Daily nutrition tonic.</p>
-<div class="benefits"><span>Energy</span><span>Strength</span></div>
-</div>
-</div>
-
-</div>
-</div>
-
-<!-- FOOTER -->
-<footer style="background:#184d37;color:#fff;margin-top:60px;">
-  <div class="container py-5">
-    <div class="row">
-
-      <!-- Brand -->
-      <div class="col-lg-4 mb-4">
-        <h5 class="fw-bold">🌿 Sanskriti Ayurveda</h5>
-        <p class="small mt-2">
-          A traditional health intelligence platform empowering wellness through
-          ancient Indian healing wisdom blended with modern technology.
-        </p>
-      </div>
-
-      <!-- Explore -->
-      <div class="col-lg-3 mb-4">
-        <h6 class="fw-semibold">Explore</h6>
-        <ul class="list-unstyled small">
-          <li><a href="#" class="text-white text-decoration-none">Ayurveda</a></li>
-          <li><a href="#" class="text-white text-decoration-none">Yoga</a></li>
-          <li><a href="#" class="text-white text-decoration-none">Remedies</a></li>
-          <li><a href="#" class="text-white text-decoration-none">Traditional Food</a></li>
-        </ul>
-      </div>
-
-      <!-- Account -->
-      <div class="col-lg-2 mb-4">
-        <h6 class="fw-semibold">Account</h6>
-        <ul class="list-unstyled small">
-          <li><a href="#" class="text-white text-decoration-none">Login</a></li>
-          <li><a href="#" class="text-white text-decoration-none">Register</a></li>
-          <li><a href="#" class="text-white text-decoration-none">Dashboard</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact -->
-      <div class="col-lg-3 mb-4">
-        <h6 class="fw-semibold">Contact</h6>
-        <p class="small mb-1">📧 support@sanskritiayurveda.com</p>
-        <p class="small mb-1">📞 +91 98765 43210</p>
-        <p class="small">📍 India</p>
-      </div>
-
+        <div class="filter-btns mt-3">
+            <button class="btn btn-success" onclick="filterCards('all')">All</button>
+            <button class="btn btn-outline-success" onclick="filterCards('cold')">Cold & Cough</button>
+            <button class="btn btn-outline-success" onclick="filterCards('fever')">Fever</button>
+            <button class="btn btn-outline-success" onclick="filterCards('digest')">Digestion</button>
+            <button class="btn btn-outline-success" onclick="filterCards('skin')">Skin</button>
+            <button class="btn btn-outline-success" onclick="filterCards('hair')">Hair Care</button>
+            <button class="btn btn-outline-success" onclick="filterCards('immunity')">Immunity</button>
+        </div>
     </div>
 
-    <hr style="border-color:rgba(255,255,255,0.3)">
+    <!-- CONTENT -->
+    <div class="container pb-5">
+        <div class="card-grid" id="cardGrid">
 
-    <div class="text-center small">
-      © 2026 Sanskriti Ayurveda | All Rights Reserved
+            <!-- 20 FULL REMEDY CARDS -->
+
+            <div class="rem-card cold">
+                <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574">
+                <div class="content">
+                    <span class="tag">Cold & Cough</span>
+                    <h6>Honey Ginger Tea</h6>
+                    <p>Relieves sore throat and congestion.</p>
+                    <div class="benefits"><span>Soothing</span><span>Anti-inflammatory</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card fever">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd">
+                <div class="content">
+                    <span class="tag">Fever</span>
+                    <h6>Tulsi Kadha</h6>
+                    <p>Boosts immunity and reduces fever.</p>
+                    <div class="benefits"><span>Antiviral</span><span>Detox</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card digest">
+                <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924">
+                <div class="content">
+                    <span class="tag">Digestion</span>
+                    <h6>Jeera Water</h6>
+                    <p>Improves digestion and metabolism.</p>
+                    <div class="benefits"><span>Detox</span><span>Bloating relief</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card skin">
+                <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6">
+                <div class="content">
+                    <span class="tag">Skin</span>
+                    <h6>Aloe Vera Face Pack</h6>
+                    <p>Natural glow and acne reduction.</p>
+                    <div class="benefits"><span>Cooling</span><span>Hydration</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card hair">
+                <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
+                <div class="content">
+                    <span class="tag">Hair Care</span>
+                    <h6>Amla Oil Massage</h6>
+                    <p>Prevents hair fall and greying.</p>
+                    <div class="benefits"><span>Hair growth</span><span>Strength</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card immunity">
+                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3">
+                <div class="content">
+                    <span class="tag">Immunity</span>
+                    <h6>Turmeric Milk</h6>
+                    <p>Strengthens immunity and reduces inflammation.</p>
+                    <div class="benefits"><span>Immunity boost</span><span>Recovery</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card cold">
+                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9">
+                <div class="content">
+                    <span class="tag">Cold & Cough</span>
+                    <h6>Steam Inhalation</h6>
+                    <p>Clears nasal congestion.</p>
+                    <div class="benefits"><span>Sinus relief</span><span>Breathing</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card fever">
+                <img src="https://images.unsplash.com/photo-1604908177522-040d1dcdc11f">
+                <div class="content">
+                    <span class="tag">Fever</span>
+                    <h6>Coriander Seed Drink</h6>
+                    <p>Natural fever reducer.</p>
+                    <div class="benefits"><span>Cooling</span><span>Detox</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card digest">
+                <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb36">
+                <div class="content">
+                    <span class="tag">Digestion</span>
+                    <h6>Triphala Water</h6>
+                    <p>Improves bowel movement.</p>
+                    <div class="benefits"><span>Laxative</span><span>Clean gut</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card skin">
+                <img src="https://images.unsplash.com/photo-1556228578-4c7d76daba55">
+                <div class="content">
+                    <span class="tag">Skin</span>
+                    <h6>Neem Face Pack</h6>
+                    <p>Controls acne and pimples.</p>
+                    <div class="benefits"><span>Antibacterial</span><span>Oil control</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card hair">
+                <img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2">
+                <div class="content">
+                    <span class="tag">Hair Care</span>
+                    <h6>Coconut Oil Therapy</h6>
+                    <p>Nourishes scalp deeply.</p>
+                    <div class="benefits"><span>Moisture</span><span>Strength</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card immunity">
+                <img src="https://images.unsplash.com/photo-1556911073-52527ac437f5">
+                <div class="content">
+                    <span class="tag">Immunity</span>
+                    <h6>Chyawanprash</h6>
+                    <p>Boosts body resistance.</p>
+                    <div class="benefits"><span>Energy</span><span>Vitality</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card cold">
+                <img src="https://images.unsplash.com/photo-1514996937319-344454492b37">
+                <div class="content">
+                    <span class="tag">Cold & Cough</span>
+                    <h6>Black Pepper Tea</h6>
+                    <p>Relieves throat irritation.</p>
+                    <div class="benefits"><span>Warmth</span><span>Relief</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card fever">
+                <img src="https://images.unsplash.com/photo-1524592950408-8eafc5888a69">
+                <div class="content">
+                    <span class="tag">Fever</span>
+                    <h6>Mint Lemon Drink</h6>
+                    <p>Hydration and cooling.</p>
+                    <div class="benefits"><span>Cooling</span><span>Refresh</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card digest">
+                <img src="https://images.unsplash.com/photo-1604908177047-2735f06b78b6">
+                <div class="content">
+                    <span class="tag">Digestion</span>
+                    <h6>Buttermilk Therapy</h6>
+                    <p>Improves gut bacteria.</p>
+                    <div class="benefits"><span>Probiotic</span><span>Light</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card skin">
+                <img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357">
+                <div class="content">
+                    <span class="tag">Skin</span>
+                    <h6>Rose Water Spray</h6>
+                    <p>Natural skin toner.</p>
+                    <div class="benefits"><span>Hydration</span><span>Glow</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card hair">
+                <img src="https://images.unsplash.com/photo-1615485290484-f1f345962f8d">
+                <div class="content">
+                    <span class="tag">Hair Care</span>
+                    <h6>Onion Juice Pack</h6>
+                    <p>Stimulates hair regrowth.</p>
+                    <div class="benefits"><span>Growth</span><span>Strength</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card immunity">
+                <img src="https://images.unsplash.com/photo-1506086679525-9c3fdbcb0a5a">
+                <div class="content">
+                    <span class="tag">Immunity</span>
+                    <h6>Giloy Juice</h6>
+                    <p>Strong immunity booster.</p>
+                    <div class="benefits"><span>Detox</span><span>Resistance</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rem-card immunity">
+                <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924">
+                <div class="content">
+                    <span class="tag">Immunity</span>
+                    <h6>Dry Fruits Mix</h6>
+                    <p>Daily nutrition tonic.</p>
+                    <div class="benefits"><span>Energy</span><span>Strength</span></div>
+
+                    <div class="icon-row mt-3">
+                        <i class="bi bi-heart like-icon"></i>
+                        <i class="bi bi-bookmark save-icon"></i>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Dynamic posts linked from database for Remedies -->
+            {% for post in posts %}
+            <div class="rem-card {{ post.subcategory|default:'all'|lower }}">
+                {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                {% else %}
+                <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574" alt="Default Remedy Image">
+                {% endif %}
+                <div class="content">
+                    <span class="tag">{{ post.subcategory|default:"Remedy"|title }}</span>
+                    <h6>{{ post.title }}</h6>
+                    <p>{{ post.content|truncatechars:40 }}</p>
+                    <div class="benefits"><span>Healing</span><span>Natural</span></div>
+
+                    <div class="icon-row mt-3">
+                        <form action="{% url 'like_post' post.id %}" method="POST" class="d-inline m-0 p-0">
+                            {% csrf_token %}
+                            <button type="submit"
+                                class="btn btn-link p-0 action-icon {% if request.user in post.likes.all %}like-active bi-heart-fill{% else %}like-icon bi-heart{% endif %} m-0 shadow-none border-0 text-decoration-none"></button>
+                        </form>
+
+                        <form action="{% url 'save_post' post.id %}" method="POST" class="d-inline m-0 p-0">
+                            {% csrf_token %}
+                            <button type="submit"
+                                class="btn btn-link p-0 action-icon {% if request.user in post.saves.all %}save-active bi-bookmark-fill{% else %}save-icon bi-bookmark{% endif %} m-0 shadow-none border-0 text-decoration-none"></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
     </div>
-  </div>
-</footer>
 
-<script>
-function filterCards(type){
-    let cards=document.querySelectorAll(".rem-card");
-    cards.forEach(card=>{
-        if(type==="all" || card.classList.contains(type)){
-            card.style.display="block";
-        }else{
-            card.style.display="none";
+    <!-- FOOTER -->
+    <footer style="background:#184d37;color:#fff;margin-top:60px;">
+        <div class="container py-5">
+            <div class="row">
+
+                <!-- Brand -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold">🌿 Sanskriti Ayurveda</h5>
+                    <p class="small mt-2">
+                        A traditional health intelligence platform empowering wellness through
+                        ancient Indian healing wisdom blended with modern technology.
+                    </p>
+                </div>
+
+                <!-- Explore -->
+                <div class="col-lg-3 mb-4">
+                    <h6 class="fw-semibold">Explore</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="{% url 'ayurveda' %}" class="text-white text-decoration-none">Ayurveda</a></li>
+                        <li><a href="{% url 'yoga' %}" class="text-white text-decoration-none">Yoga</a></li>
+                        <li><a href="{% url 'remedies' %}" class="text-white text-decoration-none">Remedies</a></li>
+                        <li><a href="{% url 'food' %}" class="text-white text-decoration-none">Traditional Food</a></li>
+                    </ul>
+                </div>
+
+                <!-- Account -->
+                <div class="col-lg-2 mb-4">
+                    <h6 class="fw-semibold">Account</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="{% url 'user_login' %}" class="text-white text-decoration-none">Login</a></li>
+                        <li><a href="{% url 'user_register' %}" class="text-white text-decoration-none">Register</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-lg-3 mb-4">
+                    <h6 class="fw-semibold">Contact</h6>
+                    <p class="small mb-1">📧 support@sanskritiayurveda.com</p>
+                    <p class="small mb-1">📞 +91 98765 43210</p>
+                    <p class="small">📍 India</p>
+                </div>
+
+            </div>
+
+            <hr style="border-color:rgba(255,255,255,0.3)">
+
+            <div class="text-center small">
+                © 2026 Sanskriti Ayurveda | All Rights Reserved
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function filterCards(type) {
+            let cards = document.querySelectorAll(".rem-card");
+
+            // Change active button color visually
+            let btns = document.querySelectorAll(".filter-btns button");
+            btns.forEach(btn => {
+                btn.classList.remove("btn-success");
+                btn.classList.add("btn-outline-success");
+            });
+            // the clicked button visually becomes primary success
+            let clickedIndex = ["all", "cold", "fever", "digest", "skin", "hair", "immunity"].indexOf(type);
+            if (clickedIndex !== -1) {
+                btns[clickedIndex].classList.remove("btn-outline-success");
+                btns[clickedIndex].classList.add("btn-success");
+            }
+
+            cards.forEach(card => {
+                if (type === "all" || card.classList.contains(type)) {
+                    card.style.display = "flex"; // Restore to flexbox flow for flex layout cards!
+                } else {
+                    card.style.display = "none";
+                }
+            });
         }
-    });
-}
 
-document.getElementById("search").addEventListener("keyup",function(){
-    let value=this.value.toLowerCase();
-    document.querySelectorAll(".rem-card").forEach(card=>{
-        card.style.display=card.innerText.toLowerCase().includes(value)?"block":"none";
-    });
-});
-</script>
+        document.getElementById("search").addEventListener("keyup", function () {
+            let value = this.value.toLowerCase();
+            document.querySelectorAll(".rem-card").forEach(card => {
+                card.style.display = card.innerText.toLowerCase().includes(value) ? "flex" : "none";
+            });
+        });
+
+        /* LIKE BUTTON */
+        document.querySelectorAll(".like-icon").forEach(icon => {
+            if (icon.tagName === "I") {
+                icon.addEventListener("click", function () {
+                    this.classList.toggle("bi-heart");
+                    this.classList.toggle("bi-heart-fill");
+                    this.classList.toggle("like-active");
+                });
+            }
+        });
+
+        /* SAVE BUTTON */
+        document.querySelectorAll(".save-icon").forEach(icon => {
+            if (icon.tagName === "I") {
+                icon.addEventListener("click", function () {
+                    this.classList.toggle("bi-bookmark");
+                    this.classList.toggle("bi-bookmark-fill");
+                    this.classList.toggle("save-active");
+                });
+            }
+        });
+
+    </script>
 
 </body>
+
 </html>

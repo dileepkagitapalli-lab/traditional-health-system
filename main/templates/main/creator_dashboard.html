@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard | Sanskriti Ayurveda</title>
+    <title>Creator Dashboard | Sanskriti Ayurveda</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -71,6 +71,26 @@
             font-size: 16px;
         }
 
+        .create-btn {
+            background: white;
+            color: #184d37;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-weight: 600;
+            margin-top: 15px;
+            display: inline-block;
+            transition: 0.3s;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .create-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            color: #1a6e42;
+        }
+
+
         /* TABS */
         .nav-pills {
             justify-content: center;
@@ -96,7 +116,7 @@
             box-shadow: 0 8px 20px rgba(24, 77, 55, 0.2);
         }
 
-        /* CARDS (Matching other pages) */
+        /* CARDS (Matching user dashboard) */
         .dash-card {
             background: #fff;
             border-radius: 18px;
@@ -138,6 +158,18 @@
             font-weight: 500;
         }
 
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
         .dash-card h6 {
             font-weight: 600;
             font-size: 18px;
@@ -154,29 +186,20 @@
             margin-top: auto;
             display: flex;
             justify-content: flex-end;
+            align-items: center;
             gap: 15px;
             padding-top: 15px;
             border-top: 1px solid #f1f1f1;
         }
 
-        .action-icon {
-            font-size: 20px;
-            color: #999;
-            transition: 0.3s;
-            cursor: pointer;
+        .stat-item {
+            font-size: 14px;
+            color: #6c7a70;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .action-icon:hover {
-            transform: scale(1.1);
-        }
-
-        .like-active {
-            color: #e63946 !important;
-        }
-
-        .save-active {
-            color: #184d37 !important;
-        }
 
         /* EMPTY STATE */
         .empty-state {
@@ -220,8 +243,9 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'yoga' %}">Yoga</a></li>
             </ul>
             <ul class="navbar-nav ms-auto flex-row align-items-center flex-wrap" style="column-gap: 15px;">
-                <li class="nav-item"><a class="nav-link fw-bold text-warning" href="{% url 'user_dashboard' %}">My
-                        Profile</a></li>
+                <li class="nav-item"><a class="nav-link"><i class="fa-solid fa-plus me-1"></i>New Post</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-warning"
+                        href="{% url 'creator_dashboard' %}">Creator DB</a></li>
                 <li class="nav-item">
                     <form action="{% url 'logout' %}" method="post" class="d-inline">
                         {% csrf_token %}
@@ -236,10 +260,14 @@
     <!-- PROFILE HEADER -->
     <div class="profile-header">
         <div class="profile-avatar">
-            <i class="bi bi-person-fill"></i>
+            <i class="bi bi-person-video3"></i>
         </div>
         <h1>{{ user.username|title }}</h1>
-        <p><i class="bi bi-star-fill text-warning me-2"></i>Health Enthusiast</p>
+        <p><i class="bi bi-pen-fill text-warning me-2"></i>Content Creator</p>
+
+        <a href="{% url 'create_post' %}" class="create-btn">
+            <i class="fa-solid fa-plus me-1"></i> Create New Post
+        </a>
     </div>
 
     <div class="container pb-5">
@@ -247,15 +275,9 @@
         <!-- TABS -->
         <ul class="nav nav-pills" id="dashboardTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="saved-tab" data-bs-toggle="pill" data-bs-target="#saved"
-                    type="button" role="tab" aria-controls="saved" aria-selected="true">
-                    <i class="bi bi-bookmark-fill me-2"></i> Saved Content
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="liked-tab" data-bs-toggle="pill" data-bs-target="#liked" type="button"
-                    role="tab" aria-controls="liked" aria-selected="false">
-                    <i class="bi bi-heart-fill me-2"></i> Liked Content
+                <button class="nav-link active" id="myposts-tab" data-bs-toggle="pill" data-bs-target="#myposts"
+                    type="button" role="tab" aria-controls="myposts" aria-selected="true">
+                    <i class="bi bi-file-earmark-richtext-fill me-2"></i> My Content Collection
                 </button>
             </li>
         </ul>
@@ -263,34 +285,49 @@
         <!-- TAB CONTENT -->
         <div class="tab-content" id="dashboardTabsContent">
 
-            <!-- SAVED CONTENT TAB -->
-            <div class="tab-pane fade show active" id="saved" role="tabpanel" aria-labelledby="saved-tab">
+            <!-- MY POSTS TAB -->
+            <div class="tab-pane fade show active" id="myposts" role="tabpanel" aria-labelledby="myposts-tab">
                 <div class="row g-4">
-                    {% for post in saved_posts %}
+                    {% for post in my_posts %}
                     <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="dash-card">
+                        <div class="dash-card position-relative">
+
+                            <!-- Status Badge Overlay -->
+                            {% if post.status == 'approved' %}
+                            <span class="badge bg-success status-badge"><i class="fa-solid fa-check me-1"></i>
+                                Approved</span>
+                            {% elif post.status == 'pending' %}
+                            <span class="badge bg-warning text-dark status-badge"><i class="fa-solid fa-clock me-1"></i>
+                                Pending</span>
+                            {% else %}
+                            <span class="badge bg-danger status-badge"><i class="fa-solid fa-xmark me-1"></i>
+                                Rejected</span>
+                            {% endif %}
+
                             {% if post.image %}
                             <img src="{{ post.image.url }}">
                             {% else %}
                             <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574">
                             {% endif %}
+
                             <div class="dash-content">
-                                <span class="tag">{{ post.category|title }}</span>
+                                <span class="tag">{{ post.get_category_display }}</span>
                                 <h6>{{ post.title }}</h6>
-                                <p>{{ post.content|truncatechars:60 }}</p>
+                                <p class="mb-2">{{ post.content|truncatechars:60 }}</p>
 
-                                <div class="icon-row">
-                                    <form action="{% url 'like_post' post.id %}" method="POST" class="d-inline m-0 p-0">
-                                        {% csrf_token %}
-                                        <button type="submit"
-                                            class="btn btn-link p-0 action-icon {% if request.user in post.likes.all %}like-active bi-heart-fill{% else %}bi-heart{% endif %} m-0 shadow-none border-0 text-decoration-none"></button>
-                                    </form>
+                                <div class="text-muted small mb-3">
+                                    <i class="bi bi-calendar3 me-1"></i> {{ post.created_at|date:"M d, Y" }}
+                                </div>
 
-                                    <form action="{% url 'save_post' post.id %}" method="POST" class="d-inline m-0 p-0">
-                                        {% csrf_token %}
-                                        <button type="submit"
-                                            class="btn btn-link p-0 action-icon {% if request.user in post.saves.all %}save-active bi-bookmark-fill{% else %}bi-bookmark{% endif %} m-0 shadow-none border-0 text-decoration-none"></button>
-                                    </form>
+                                <div class="icon-row mt-auto">
+                                    <div class="stat-item d-flex align-items-center">
+                                        <i class="bi bi-heart-fill text-danger me-1" style="font-size: 16px;"></i>
+                                        <span class="fw-bold">{{ post.likes.count }}</span>
+                                    </div>
+                                    <div class="stat-item d-flex align-items-center">
+                                        <i class="bi bi-bookmark-fill text-dark me-1" style="font-size: 16px;"></i>
+                                        <span class="fw-bold">{{ post.saves.count }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -298,58 +335,12 @@
                     {% empty %}
                     <div class="col-12">
                         <div class="empty-state">
-                            <i class="bi bi-journal-bookmark"></i>
-                            <h4>No Saved Content Yet</h4>
-                            <p>You haven't saved any content yet. Explore our categories to find useful remedies and
-                                foods!</p>
-                            <a href="{% url 'remedies' %}" class="btn btn-success rounded-pill px-4 py-2">Explore
-                                Remedies</a>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <!-- LIKED CONTENT TAB -->
-            <div class="tab-pane fade" id="liked" role="tabpanel" aria-labelledby="liked-tab">
-                <div class="row g-4">
-                    {% for post in liked_posts %}
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="dash-card">
-                            {% if post.image %}
-                            <img src="{{ post.image.url }}">
-                            {% else %}
-                            <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574">
-                            {% endif %}
-                            <div class="dash-content">
-                                <span class="tag">{{ post.category|title }}</span>
-                                <h6>{{ post.title }}</h6>
-                                <p>{{ post.content|truncatechars:60 }}</p>
-
-                                <div class="icon-row">
-                                    <form action="{% url 'like_post' post.id %}" method="POST" class="d-inline m-0 p-0">
-                                        {% csrf_token %}
-                                        <button type="submit"
-                                            class="btn btn-link p-0 action-icon {% if request.user in post.likes.all %}like-active bi-heart-fill{% else %}bi-heart{% endif %} m-0 shadow-none border-0 text-decoration-none"></button>
-                                    </form>
-
-                                    <form action="{% url 'save_post' post.id %}" method="POST" class="d-inline m-0 p-0">
-                                        {% csrf_token %}
-                                        <button type="submit"
-                                            class="btn btn-link p-0 action-icon {% if request.user in post.saves.all %}save-active bi-bookmark-fill{% else %}bi-bookmark{% endif %} m-0 shadow-none border-0 text-decoration-none"></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% empty %}
-                    <div class="col-12">
-                        <div class="empty-state">
-                            <i class="bi bi-heart-break"></i>
-                            <h4>No Liked Content Yet</h4>
-                            <p>You haven't liked any content yet.</p>
-                            <a href="{% url 'ayurveda' %}" class="btn btn-success rounded-pill px-4 py-2">Explore
-                                Ayurveda</a>
+                            <i class="bi bi-vector-pen"></i>
+                            <h4>Your Canvas is Empty</h4>
+                            <p>You haven't published any posts yet. Start sharing your traditional health knowledge with
+                                the community!</p>
+                            <a href="{% url 'create_post' %}" class="btn btn-success rounded-pill px-4 py-2">Create Your
+                                First Post</a>
                         </div>
                     </div>
                     {% endfor %}

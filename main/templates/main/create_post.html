@@ -1,0 +1,299 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post | Sanskriti Ayurveda</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background: #f4f8f5;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: #184d37;
+            padding: 15px 0;
+        }
+
+        .navbar a {
+            color: #fff !important;
+            font-size: 18px;
+        }
+
+        /* HEADER */
+        .page-header {
+            background: linear-gradient(135deg, #184d37, #2a7a58);
+            color: white;
+            padding: 50px 20px;
+            border-radius: 0 0 30px 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(24, 77, 55, 0.2);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .page-header p {
+            opacity: 0.9;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* FORM WRAPPER */
+        .form-wrapper {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            margin-bottom: 60px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #184d37;
+            margin-bottom: 8px;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 12px;
+            padding: 12px 15px;
+            border: 1px solid #d3e6dd;
+            background-color: #fbfbf7;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #184d37;
+            box-shadow: 0 0 0 0.25rem rgba(24, 77, 55, 0.1);
+            background-color: white;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #184d37;
+            color: white;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-weight: 600;
+            font-size: 18px;
+            border: none;
+            width: 100%;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(24, 77, 55, 0.2);
+        }
+
+        .submit-btn:hover {
+            background: #123e2b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(24, 77, 55, 0.3);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #6c7a70;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+
+        .back-link:hover {
+            color: #184d37;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">🌿 Sanskriti Ayurveda</a>
+
+            <ul class="navbar-nav me-auto flex-row align-items-center flex-wrap" style="column-gap: 15px;">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'ayurveda' %}">Ayurveda</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'remedies' %}">Remedies</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'food' %}">Foods</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'yoga' %}">Yoga</a></li>
+            </ul>
+            <ul class="navbar-nav ms-auto flex-row align-items-center flex-wrap" style="column-gap: 15px;">
+                <li class="nav-item"><a class="nav-link fw-bold text-warning"><i class="fa-solid fa-plus me-1"></i>New
+                        Post</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'creator_dashboard' %}">Creator DB</a></li>
+                <li class="nav-item">
+                    <form action="{% url 'logout' %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link nav-link text-white m-0 p-0"
+                            style="font-size:18px;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <i class="fa-solid fa-feather-pointed fa-3x mb-3 text-warning"></i>
+        <h1>Share Processing Knowledge</h1>
+        <p>Contributing traditional practices, natural remedies, and ancient wisdom to our growing Ayurvedic repository.
+        </p>
+    </div>
+
+    <!-- FORM -->
+    <div class="container pb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="form-wrapper">
+
+                    {% if messages %}
+                    <div class="messages mb-4">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} rounded-3 border-0 shadow-sm" role="alert">
+                            <i class="bi bi-info-circle-fill me-2"></i> {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form method="POST" action="{% url 'create_post' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label for="{{ form.title.id_for_label }}" class="form-label">Post Title</label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                            <div class="text-danger small mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{
+                                form.title.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="{{ form.category.id_for_label }}" class="form-label">Category
+                                Classification</label>
+                            {{ form.category }}
+                            <div class="form-text text-muted mt-2"><i class="bi bi-tag-fill me-1"></i> Ensure your post
+                                is filed under the correct discipline.</div>
+                            {% if form.category.errors %}
+                            <div class="text-danger small mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{
+                                form.category.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="{{ form.content.id_for_label }}" class="form-label">Detailed Content</label>
+                            {{ form.content }}
+                            <div class="form-text text-muted mt-2">
+                                <i class="bi bi-info-circle-fill me-1"></i> Share specific ingredients, step-by-step
+                                instructions, and traditional context here. Be as descriptive as possible.
+                            </div>
+                            {% if form.content.errors %}
+                            <div class="text-danger small mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{
+                                form.content.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="{{ form.image.id_for_label }}" class="form-label">Cover Image</label>
+                            <div class="p-3 border rounded-3 bg-light">
+                                {{ form.image }}
+                            </div>
+                            <div class="form-text text-muted mt-2"><i class="bi bi-image me-1"></i> Recommended: Upload
+                                a high-quality horizontal image.</div>
+                            {% if form.image.errors %}
+                            <div class="text-danger small mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{
+                                form.image.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <p class="small text-muted mb-4"><i class="fa-solid fa-shield-halved text-success me-1"></i> All
+                            posts are verified by an administrator before appearing publicly on the platform.</p>
+
+                        <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane me-2"></i> Submit for
+                            Verification</button>
+
+                        <div class="text-center mt-3">
+                            <a href="{% url 'creator_dashboard' %}" class="back-link"><i
+                                    class="bi bi-arrow-left me-1"></i> Back to Dashboard</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer style="background:#184d37;color:#fff;margin-top:20px;">
+        <div class="container py-5">
+            <div class="row">
+
+                <!-- Brand -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold">🌿 Sanskriti Ayurveda</h5>
+                    <p class="small mt-2">
+                        A traditional health intelligence platform empowering wellness through
+                        ancient Indian healing wisdom blended with modern technology.
+                    </p>
+                </div>
+
+                <!-- Explore -->
+                <div class="col-lg-3 mb-4">
+                    <h6 class="fw-semibold">Explore</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="{% url 'ayurveda' %}" class="text-white text-decoration-none">Ayurveda</a></li>
+                        <li><a href="{% url 'yoga' %}" class="text-white text-decoration-none">Yoga</a></li>
+                        <li><a href="{% url 'remedies' %}" class="text-white text-decoration-none">Remedies</a></li>
+                        <li><a href="{% url 'food' %}" class="text-white text-decoration-none">Traditional Food</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-lg-3 mb-4">
+                    <h6 class="fw-semibold">Contact</h6>
+                    <p class="small mb-1">📧 support@sanskritiayurveda.com</p>
+                    <p class="small mb-1">📞 +91 98765 43210</p>
+                    <p class="small">📍 India</p>
+                </div>
+
+            </div>
+
+            <hr style="border-color:rgba(255,255,255,0.3)">
+
+            <div class="text-center small">
+                © 2026 Sanskriti Ayurveda | All Rights Reserved
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

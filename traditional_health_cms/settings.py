@@ -124,3 +124,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ADMIN_SECURITY_KEY = "yoga@25"
+
+# Custom login url for @login_required decorator
+LOGIN_URL = 'user_login'
